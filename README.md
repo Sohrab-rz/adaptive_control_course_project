@@ -1,8 +1,7 @@
 # Adaptive Control and Switching Systems — Course Projects
 
-**Name:** Sohrab Rezaei  
-**Department:** Electrical Engineering  
-
+**Author:** Sohrab Rezaei  
+Email: srezaei2@jhu.edu
 ---
 
 ## Table of Contents
