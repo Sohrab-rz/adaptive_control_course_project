@@ -154,6 +154,17 @@ The same system structure is used with input noise added to ensure persistent ex
   ![Figure 23](figures/figure23.png)
 
 ---
+## References
+
+This project is based on the following references:
+
+- Rohrs, C., et al. "Robustness of continuous-time adaptive control algorithms in the presence of unmodeled dynamics." *IEEE Transactions on Automatic Control*, vol. 30, no. 9, 2003, pp. 881-889.
+
+- Åström, K. Johan. "Adaptive feedback control." *Proceedings of the IEEE*, vol. 75, no. 2, 1987, pp. 185-217.
+
+- Daniel Liberzon, *Switching in Systems and Control*, vol. 190, Springer, 2003.
+
+---
 ## Project 2 
 
 ### 2.1 Problem Definition
