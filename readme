@@ -1,0 +1,289 @@
+# Adaptive Control and Switching Systems — Course Projects
+
+**Name:** Sohrab Rezaei  
+**Department:** Electrical Engineering  
+
+---
+
+## Table of Contents
+
+1. [Project 1 – Course Project 1](#project-1-course-project-1)  
+   1.1 Implementation  
+     1.1.1 Rohrs' Counterexample Simulation  
+     1.1.2 Dead-Zone Method  
+     1.1.3 σ‑Modification Method  
+     1.1.4 Control-Parameter Bounding Method  
+     1.1.5 Effect of PE Input Signal  
+   1.2 Results  
+     1.2.1 Rohrs' Counterexample Results  
+     1.2.2 Dead-Zone Results  
+     1.2.3 σ‑Modification Results  
+     1.2.4 Control-Parameter Bounding Results  
+     1.2.5 Effect of PE Signal Results  
+
+2. [Project 2 – Course Project 2](#project-2-course-project-2)  
+   2.1 Initial Definitions  
+   2.2 Common Lyapunov Function  
+   2.3 Multiple Lyapunov Functions  
+   2.4 Stability Under Slow Switching (Dwell Time)  
+
+3. [Project 3 – Course Project 3](#project-3-course-project-3)  
+   3.1 Problem Definition  
+   3.2 Simulation  
+   3.3 PID Tuning Method  
+   3.4 Results  
+
+---
+
+## Project 1 — Course Project 1
+
+### 1.1 Implementation
+
+#### 1.1.1 Rohrs' Counterexample Simulation
+
+We first implemented the original system of Rohrs' counterexample and simulated the conditions specified. The block diagram includes the reference model, the main plant, the matching block, and the controller — each described individually.
+
+**Block Diagram:**  
+![Figure 1 – Overall Rohrs Counterexample Diagram](figures/figure1.png)
+
+**Reference Model:**  
+![Figure 2 – Reference Model Block](figures/figure2.png)
+
+**System Model:**  
+![Figure 3 – Plant Model Block](figures/figure3.png)
+
+**Matching Block:**  
+![Figure 4 – Matching Block Diagram](figures/figure4.png)
+
+**Controller Block:**  
+![Figure 5 – Controller Block](figures/figure5.png)
+
+With the full system diagram in place, we tested performance under different conditions; results are detailed below.
+
+---
+
+#### 1.1.2 Dead‑Zone Method
+
+Similar system structure, but the matching block incorporates dead‑zone logic. After signal normalization, the dead‑zone is applied as shown:
+
+![Figure 6 – Matching Block with Dead‑Zone](figures/figure6.png)
+
+---
+
+#### 1.1.3 σ‑Modification Method
+
+In this variant, the matching block includes σ‑Modification: an adaptation decay term is introduced governed by σ, and the adaptation law is modified accordingly:
+
+![Figure 7 – Matching Block with σ‑Modification](figures/figure7.png)
+
+---
+
+#### 1.1.4 Control‑Parameter Bounding
+
+We restricted adaptation parameters within limits:  
+- \( K_r \in [0, 0.5] \)  
+- \( K_y \in [-3, 0] \)
+
+The matching block enforces these bounds:
+
+![Figure 8 – Bounded Parameter Matching Block](figures/figure8.png)
+
+---
+
+#### 1.1.5 Effect of PE Input Signal
+
+The same system structure is used with input noise added to ensure persistent excitation (PE):
+
+![Figure 9 – PE Input Signal Diagram](figures/figure9.png)
+
+---
+
+### 1.2 Results
+
+#### 1.2.1 Rohrs' Counterexample Results
+
+- **Square wave input, without noise**: response stable and acceptable.  
+  ![Figure 10](figures/figure10.png)
+
+- **Square wave input, with output noise**: still stable.  
+  ![Figure 11](figures/figure11.png)
+
+- **Long-time step input, no noise**: stable response.  
+  ![Figure 12](figures/figure12.png)
+
+- **Long-time step input, with noise**: instability due to parameter drift observed.  
+  ![Figure 13](figures/figure13.png)
+
+- **Sinusoidal input at 8 rad/s**: system exhibits parameter explosion as expected.  
+  ![Figure 14](figures/figure14.png)
+
+- **Sinusoidal input at 16.1 rad/s**: system becomes unstable.  
+  ![Figure 15](figures/figure15.png)
+
+---
+
+#### 1.2.2 Dead‑Zone Results
+
+- Square wave response stable and acceptable.  
+  ![Figure 16](figures/figure16.png)
+
+- Square wave with noise remains stable.  
+  ![Figure 17](figures/figure17.png)
+
+- Sinusoid at 16.1 rad/s: stable but with phase/gain degradation — a trade‑off.  
+  ![Figure 18](figures/figure18.png)
+
+- Robust against output noise.  
+  ![Figure 19](figures/figure19.png)
+
+---
+
+#### 1.2.3 σ‑Modification Results
+
+- At 16.1 rad/s sinusoid, system remains stable but with reduced performance—phase/gain error.  
+  ![Figure 20](figures/figure20.png)
+
+---
+
+#### 1.2.4 Control‑Parameter Bounding Results
+
+- Response to 16.1 rad/s sinusoid is stable.  
+  ![Figure 21](figures/figure21.png)
+
+- Among all methods, square wave performance is best here. Bounding limits prevent over-aggressive adaptation.  
+  ![Figure 22](figures/figure22.png)
+
+---
+
+#### 1.2.5 Effect of PE Signal Results
+
+- PE input prevents instability, but response remains suboptimal, and parameter drift ("explosion") may still occur.  
+  ![Figure 23](figures/figure23.png)
+
+---
+
+## Project 2 — Course Project 2
+
+### 2.1 Initial Definitions
+
+Consider a switching system family indexed by \( p \in P \). Define a switching signal σ(t). Each subsystem is assumed locally Lipschitz. The system is:
+
+- **GUAS (Global Uniform Asymptotic Stability)** if ∃ δ > 0 and a KL-function β such that:
+  
+  \[
+  \|x(t)\| ≤ β(\|x_0\|, t), \quad ∀ t ≥ 0
+  \]
+
+- **GUES (Global Uniform Exponential Stability)** if β is exponential.
+
+---
+
+### 2.2 Common Lyapunov Function
+
+If all subsystems share a common Lyapunov function \( V(x) \) and positive definite function \( W(x) \) such that:
+
+\[
+\dot{V}(x) ≤ -W(x)
+\]
+
+then the switching system is GUAS. If both are quadratic, GUES results.
+
+---
+
+### 2.3 Multiple Lyapunov Functions
+
+In absence of a common Lyapunov function, assign each subsystem its own Lyapunov function \( V_p \) and compare values at switching instants. If for each:
+
+\[
+\Delta V_p ≤ -W_p
+\]
+
+then GUAS holds overall.
+
+---
+
+### 2.4 Stability Under Slow Switching (Dwell Time)
+
+Using dwell-time \( τ_d \), switching frequency is kept low enough to allow transients to decay. If each subsystem is asymptotically stable and \( τ_d \) is chosen sufficiently large (e.g. for linear systems, based on decay time), the overall system remains stable.
+
+---
+
+## Project 3 — Course Project 3
+
+### 3.1 Problem Definition
+
+A nonlinear RC circuit where capacitance depends on voltage. This is linearized at 9 operating points between 10 V and 12 V, in 0.25 V increments. A PID controller is designed for each point, and switching logic selects the appropriate controller based on model error.
+
+**Circuit Diagram:**  
+![Figure 24 – RC Circuit Diagram](figures/figure24.png)
+
+---
+
+### 3.2 Simulation Setup
+
+**Overall Simulink architecture:**  
+![Figure 25 – Full System Block Diagram](figures/figure25.png)
+
+**Linearized model bank:**  
+![Figure 26 – Model Bank](figures/figure26.png)
+
+**Switching Logic Block Diagram:**  
+![Figure 27 – Switching Logic Overview](figures/figure27.png)  
+![Figure 28 – Controller Selection Logic](figures/figure28.png)
+
+**Controller Bank:**  
+![Figure 29 – Switching Controller Bank with Dwell Time](figures/figure29.png)
+
+**Controlled Plant Block:**  
+![Figure 30 – Controlled System Block](figures/figure30.png)
+
+---
+
+### 3.3 PID Coefficient Tuning
+
+Using MATLAB’s PID Tuner, coefficients were obtained for each linearized operating point:
+
+| PID Set | Kp      | Ki       | Kd        |
+|---------|---------|----------|-----------|
+| PID 1   | 35.6203 | 442.5115 | 0.0333428 |
+| PID 2   | 35.6203 | 431.5869 | 0.0341868 |
+| PID 3   | 35.6203 | 420.9384 | 0.0350516 |
+| PID 4   | 35.6203 | 410.6729 | 0.0359376 |
+| PID 5   | 35.6203 | 400.8988 | 0.0368455 |
+| PID 6   | 35.6203 | 391.7145 | 0.0377757 |
+| PID 7   | 35.6203 | 383.2078 | 0.0387288 |
+| PID 8   | 35.6203 | 375.4557 | 0.0397053 |
+| PID 9   | 35.6203 | 362.7143 | 0.0406782 |
+
+---
+
+### 3.4 Results
+
+The system demonstrates effective control under various input types and noise conditions.
+
+**MMPID without noise:**  
+![Figure 31](figures/figure31.png)
+
+**MMPID with noise:**  
+![Figure 32](figures/figure32.png)
+
+**Square wave, no noise:**  
+![Figure 33](figures/figure33.png)
+
+**Square wave, with noise:**  
+![Figure 34](figures/figure34.png)
+
+**Step input, no noise:**  
+![Figure 35](figures/figure35.png)
+
+**Step input, with noise:**  
+![Figure 36](figures/figure36.png)
+
+---
+
+## How to Use This Repository
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/adaptive-control-reports.git
+   cd adaptive-control-reports
