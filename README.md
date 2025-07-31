@@ -189,76 +189,10 @@ This project is based on the following references:
 ## Project 2 
 
 ### 2.1 Problem Definition
-
-A nonlinear RC circuit where capacitance depends on voltage. This is linearized at 9 operating points between 10 V and 12 V, in 0.25 V increments. A PID controller is designed for each point, and switching logic selects the appropriate controller based on model error.
-
----
-
-### System Equations
-
-The system is defined by a capacitor whose capacitance $C$ is a function of the voltage across it, $V_c$.
-
-The capacitance is given by:
-$$C(V_c) = V_c^2 + C_0$$
-
-The circuit's dynamic behavior is described by the following differential equation, derived from Kirchhoff's Current Law, where $u$ is the input voltage and $R$ is the resistance:
-$$i_c = \frac{u-V_c}{R} = C \frac{dV_c}{dt} = (V_c^2 + C_0) \frac{dV_c}{dt}$$
-
-Solving for the state derivative, $\frac{dV_c}{dt}$:
-$$\frac{dV_c}{dt} = \frac{u-V_c}{R(V_c^2 + C_0)} = \frac{-1}{R(V_c^2 + C_0)}V_c + \frac{1}{R(V_c^2 + C_0)}u$$
+A nonlinear RC circuit where the capacitance depends on voltage is considered. The system is linearized at 9 operating points between 10 V and 12 V in 0.25 V increments. For each linearized model, a PID controller is designed to ensure adequate closed-loop performance around that specific operating point. During operation, switching logic selects the appropriate controller based on model error.
 
 ---
 
-### Linearization
-
-To analyze the system's local behavior, we linearize the state equation around a general operating point $(V_c=a, u=b)$ using a first-order Taylor series expansion. This requires finding the partial derivatives of $\frac{dV_c}{dt}$.
-
-**Partial Derivatives:**
-* With respect to input $u$:
-    $$
-    \frac{\partial}{\partial u} \left( \frac{dV_c}{dt} \right) = \frac{1}{R(V_c^2 + C_0)}
-    $$
-
-* With respect to state $V_c$:
-    $$
-    \frac{\partial}{\partial V_c} \left( \frac{dV_c}{dt} \right) = -\frac{1}{R(V_c^2 + C_0)} - \frac{2V_c(u-V_c)}{R(V_c^2+C_0)^2} = -\frac{(R-2)V_c^2 + RC_0 + 2V_c u}{R(V_c^2+C_0)^2}
-    $$
-
-**Linearized Equation:**
-The full linearized equation around the point $(a,b)$ is:
-$$\frac{dV_c}{dt}\bigg|_{V_c=a, u=b} \approx \frac{b-a}{R(a^2+C_0)} - \frac{(R-2)a^2 + RC_0 + 2ab}{R(a^2+C_0)^2}(V_c-a) + \frac{1}{R(a^2+C_0)}(u-b)$$
-
-This can be expressed in the simplified form:
-$$\frac{dV_c}{dt} \approx g_0 + g_1(V_c - a) + g_2(u-b)$$
-
----
-
-### Stationary Point Analysis
-
-A stationary (or equilibrium) point is where the system is stable, meaning $\frac{dV_c}{dt} = 0$. From the state equation, this occurs when $u-V_c=0$, or $V_c = u$.
-
-We evaluate the linearized model at a stationary point where $V_c = u = b$. The perturbations around this point are $\Delta V_c = V_c - b$ and $\Delta u = u - b$. The linearized dynamics become:
-$$\frac{d(\Delta V_c)}{dt} \approx g_1 \Delta V_c + g_2 \Delta u$$
-
-The coefficients $g_0$, $g_1$, and $g_2$ are calculated at this stationary point:
-$$g_0 = \frac{b-b}{R(b^2+C_0)} = 0$$
-
-$$g_1 = -\frac{1}{R(b^2+C_0)} = -\frac{1}{RC(b)}$$
-
-$$g_2 = \frac{1}{R(b^2+C_0)} = \frac{1}{RC(b)}$$
-
----
-
-### Transfer Function
-
-From the linearized dynamics around the stationary point, we can derive the transfer function $G(s) = \frac{\Delta V_c(s)}{\Delta u(s)}$ by taking the Laplace transform:
-$$s \Delta V_c(s) = g_1 \Delta V_c(s) + g_2 \Delta u(s)$$
-$$(s - g_1)\Delta V_c(s) = g_2 \Delta u(s)$$
-
-The resulting first-order transfer function is:
-$$G(s) = \frac{g_2}{s-g_1}$$
-
----
 
 ### 2.2 Simulation Setup
 
