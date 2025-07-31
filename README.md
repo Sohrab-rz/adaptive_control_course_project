@@ -138,25 +138,44 @@ The same system structure is used with input noise added to ensure persistent ex
 
 #### 1.2.2 Dead‑Zone Results
 
-- Square wave response stable and acceptable.  
-  ![Figure 16](figures/figure16.png)
+- Square wave response stable and acceptable.
+- *Figure 16: 
+   <p align="center">
+    <img src="figures/figure16a.png" width="70%" />
+    <img src="figures/figure16b.png" width="70%" />
+  </p>  
 
 - Square wave with noise remains stable.  
-  ![Figure 17](figures/figure17.png)
+- *Figure 17: 
+   <p align="center">
+    <img src="figures/figure17a.png" width="70%" />
+    <img src="figures/figure17b.png" width="70%" />
+  </p>  
 
 - Sinusoid at 16.1 rad/s: stable but with phase/gain degradation — a trade‑off.  
-  ![Figure 18](figures/figure18.png)
+- *Figure 18: 
+   <p align="center">
+    <img src="figures/figure18a.png" width="70%" />
+    <img src="figures/figure18b.png" width="70%" />
+  </p>  
 
 - Robust against output noise.  
-  ![Figure 19](figures/figure19.png)
+- *Figure 16: 
+   <p align="center">
+    <img src="figures/figure19a.png" width="70%" />
+    <img src="figures/figure19b.png" width="70%" />
+  </p>  
 
 ---
 
 #### 1.2.3 σ‑Modification Results
 
 - At 16.1 rad/s sinusoid, system remains stable but with reduced performance—phase/gain error.  
-  ![Figure 20](figures/figure20.png)
-
+- *Figure 20: 
+   <p align="center">
+    <img src="figures/figure20a.png" width="70%" />
+    <img src="figures/figure20b.png" width="70%" />
+  </p>  
 ---
 
 #### 1.2.4 Control‑Parameter Bounding Results
