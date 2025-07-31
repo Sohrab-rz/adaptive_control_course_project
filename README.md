@@ -21,21 +21,15 @@
      1.2.4 Control-Parameter Bounding Results  
      1.2.5 Effect of PE Signal Results  
 
-2. [Project 2 – Course Project 2](#project-2-course-project-2)  
-   2.1 Initial Definitions  
-   2.2 Common Lyapunov Function  
-   2.3 Multiple Lyapunov Functions  
-   2.4 Stability Under Slow Switching (Dwell Time)  
-
-3. [Project 3 – Course Project 3](#project-3-course-project-3)  
-   3.1 Problem Definition  
-   3.2 Simulation  
-   3.3 PID Tuning Method  
-   3.4 Results  
+2. [Project 2– Course Project 3](#project-3-course-project-3)  
+   2.1 Problem Definition  
+   2.2 Simulation  
+   2.3 PID Tuning Method  
+   2.4 Results  
 
 ---
 
-## Project 1 — Course Project 1
+## Project 1 
 
 ### 1.1 Implementation
 
@@ -161,56 +155,9 @@ The same system structure is used with input noise added to ensure persistent ex
   ![Figure 23](figures/figure23.png)
 
 ---
+## Project 2 
 
-## Project 2 — Course Project 2
-
-### 2.1 Initial Definitions
-
-Consider a switching system family indexed by \( p \in P \). Define a switching signal σ(t). Each subsystem is assumed locally Lipschitz. The system is:
-
-- **GUAS (Global Uniform Asymptotic Stability)** if ∃ δ > 0 and a KL-function β such that:
-  
-  \[
-  \|x(t)\| ≤ β(\|x_0\|, t), \quad ∀ t ≥ 0
-  \]
-
-- **GUES (Global Uniform Exponential Stability)** if β is exponential.
-
----
-
-### 2.2 Common Lyapunov Function
-
-If all subsystems share a common Lyapunov function \( V(x) \) and positive definite function \( W(x) \) such that:
-
-\[
-\dot{V}(x) ≤ -W(x)
-\]
-
-then the switching system is GUAS. If both are quadratic, GUES results.
-
----
-
-### 2.3 Multiple Lyapunov Functions
-
-In absence of a common Lyapunov function, assign each subsystem its own Lyapunov function \( V_p \) and compare values at switching instants. If for each:
-
-\[
-\Delta V_p ≤ -W_p
-\]
-
-then GUAS holds overall.
-
----
-
-### 2.4 Stability Under Slow Switching (Dwell Time)
-
-Using dwell-time \( τ_d \), switching frequency is kept low enough to allow transients to decay. If each subsystem is asymptotically stable and \( τ_d \) is chosen sufficiently large (e.g. for linear systems, based on decay time), the overall system remains stable.
-
----
-
-## Project 3 — Course Project 3
-
-### 3.1 Problem Definition
+### 2.1 Problem Definition
 
 A nonlinear RC circuit where capacitance depends on voltage. This is linearized at 9 operating points between 10 V and 12 V, in 0.25 V increments. A PID controller is designed for each point, and switching logic selects the appropriate controller based on model error.
 
@@ -219,7 +166,7 @@ A nonlinear RC circuit where capacitance depends on voltage. This is linearized 
 
 ---
 
-### 3.2 Simulation Setup
+### 2.2 Simulation Setup
 
 **Overall Simulink architecture:**  
 ![Figure 25 – Full System Block Diagram](figures/figure25.png)
@@ -239,7 +186,7 @@ A nonlinear RC circuit where capacitance depends on voltage. This is linearized 
 
 ---
 
-### 3.3 PID Coefficient Tuning
+### 2.3 PID Coefficient Tuning
 
 Using MATLAB’s PID Tuner, coefficients were obtained for each linearized operating point:
 
@@ -257,7 +204,7 @@ Using MATLAB’s PID Tuner, coefficients were obtained for each linearized opera
 
 ---
 
-### 3.4 Results
+### 2.4 Results
 
 The system demonstrates effective control under various input types and noise conditions.
 
@@ -279,11 +226,4 @@ The system demonstrates effective control under various input types and noise co
 **Step input, with noise:**  
 ![Figure 36](figures/figure36.png)
 
----
-
-## How to Use This Repository
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/adaptive-control-reports.git
-   cd adaptive-control-reports
+--
