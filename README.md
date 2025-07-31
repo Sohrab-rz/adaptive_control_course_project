@@ -46,7 +46,7 @@ We first implemented the original system of Rohrs' counterexample and simulated 
 ![Figure 3 – Plant Model Block](figures/figure3.png)
 
 **Matching Block:**  
-![Figure 4 – Matching Block Diagram](figures/figure4.png)
+![Figure 4 – Adaptation Block Diagram](figures/figure4.png)
 
 **Controller Block:**  
 ![Figure 5 – Controller Block](figures/figure5.png)
@@ -59,7 +59,7 @@ With the full system diagram in place, we tested performance under different con
 
 Similar system structure, but the matching block incorporates dead‑zone logic. After signal normalization, the dead‑zone is applied as shown:
 
-![Figure 6 – Matching Block with Dead‑Zone](figures/figure6.png)
+![Figure 6 – Adaptation Block with Dead‑Zone](figures/figure6.png)
 
 ---
 
@@ -67,7 +67,7 @@ Similar system structure, but the matching block incorporates dead‑zone logic.
 
 In this variant, the matching block includes σ‑Modification: an adaptation decay term is introduced governed by σ, and the adaptation law is modified accordingly:
 
-![Figure 7 – Matching Block with σ‑Modification](figures/figure7.png)
+![Figure 7 – Adaptation Block with σ‑Modification](figures/figure7.png)
 
 ---
 
@@ -96,23 +96,44 @@ The same system structure is used with input noise added to ensure persistent ex
 #### 1.2.1 Rohrs' Counterexample Results
 
 - **Square wave input, without noise**: response stable and acceptable.  
-  ![Figure 10](figures/figure10.png)
-
+   <p align="center">
+    <img src="figures/figure10a.png" width="30%" />
+    <img src="figures/figure10b.png" width="30%" />
+  </p>  
+  *Figure 10: Reference tracking, control signal, and parameters.*
+  
 - **Square wave input, with output noise**: still stable.  
-  ![Figure 11](figures/figure11.png)
+   <p align="center">
+    <img src="figures/figure11a.png" width="30%" />
+    <img src="figures/figure11b.png" width="30%" />
+  </p>  
+  *Figure 11: Reference tracking, control signal, and parameters.*
 
 - **Long-time step input, no noise**: stable response.  
-  ![Figure 12](figures/figure12.png)
-
+   <p align="center">
+    <img src="figures/figure12a.png" width="30%" />
+    <img src="figures/figure12b.png" width="30%" />
+  </p>  
+  *Figure 12: Reference tracking, control signal, and parameters.*
+  
 - **Long-time step input, with noise**: instability due to parameter drift observed.  
-  ![Figure 13](figures/figure13.png)
-
+   <p align="center">
+    <img src="figures/figure13a.png" width="30%" />
+    <img src="figures/figure13b.png" width="30%" />
+  </p>  
+  *Figure 13: Reference tracking, control signal, and parameters.*
 - **Sinusoidal input at 8 rad/s**: system exhibits parameter explosion as expected.  
-  ![Figure 14](figures/figure14.png)
-
+   <p align="center">
+    <img src="figures/figure14a.png" width="30%" />
+    <img src="figures/figure14b.png" width="30%" />
+  </p>  
+  *Figure 14: Reference tracking, control signal, and parameters.*
 - **Sinusoidal input at 16.1 rad/s**: system becomes unstable.  
-  ![Figure 15](figures/figure15.png)
-
+   <p align="center">
+    <img src="figures/figure15a.png" width="30%" />
+    <img src="figures/figure15b.png" width="30%" />
+  </p>  
+  *Figure 15: Reference tracking, control signal, and parameters.*
 ---
 
 #### 1.2.2 Dead‑Zone Results
@@ -171,8 +192,71 @@ This project is based on the following references:
 
 A nonlinear RC circuit where capacitance depends on voltage. This is linearized at 9 operating points between 10 V and 12 V, in 0.25 V increments. A PID controller is designed for each point, and switching logic selects the appropriate controller based on model error.
 
-**Circuit Diagram:**  
-![Figure 24 – RC Circuit Diagram](figures/figure24.png)
+---
+
+### System Equations
+
+The system is defined by a capacitor whose capacitance $C$ is a function of the voltage across it, $V_c$.
+
+The capacitance is given by:
+$$C(V_c) = V_c^2 + C_0$$
+
+The circuit's dynamic behavior is described by the following differential equation, derived from Kirchhoff's Current Law, where $u$ is the input voltage and $R$ is the resistance:
+$$i_c = \frac{u-V_c}{R} = C \frac{dV_c}{dt} = (V_c^2 + C_0) \frac{dV_c}{dt}$$
+
+Solving for the state derivative, $\frac{dV_c}{dt}$:
+$$\frac{dV_c}{dt} = \frac{u-V_c}{R(V_c^2 + C_0)} = \frac{-1}{R(V_c^2 + C_0)}V_c + \frac{1}{R(V_c^2 + C_0)}u$$
+
+---
+
+### Linearization
+
+To analyze the system's local behavior, we linearize the state equation around a general operating point $(V_c=a, u=b)$ using a first-order Taylor series expansion. This requires finding the partial derivatives of $\frac{dV_c}{dt}$.
+
+**Partial Derivatives:**
+* With respect to input $u$:
+    $$
+    \frac{\partial}{\partial u} \left( \frac{dV_c}{dt} \right) = \frac{1}{R(V_c^2 + C_0)}
+    $$
+
+* With respect to state $V_c$:
+    $$
+    \frac{\partial}{\partial V_c} \left( \frac{dV_c}{dt} \right) = -\frac{1}{R(V_c^2 + C_0)} - \frac{2V_c(u-V_c)}{R(V_c^2+C_0)^2} = -\frac{(R-2)V_c^2 + RC_0 + 2V_c u}{R(V_c^2+C_0)^2}
+    $$
+
+**Linearized Equation:**
+The full linearized equation around the point $(a,b)$ is:
+$$\frac{dV_c}{dt}\bigg|_{V_c=a, u=b} \approx \frac{b-a}{R(a^2+C_0)} - \frac{(R-2)a^2 + RC_0 + 2ab}{R(a^2+C_0)^2}(V_c-a) + \frac{1}{R(a^2+C_0)}(u-b)$$
+
+This can be expressed in the simplified form:
+$$\frac{dV_c}{dt} \approx g_0 + g_1(V_c - a) + g_2(u-b)$$
+
+---
+
+### Stationary Point Analysis
+
+A stationary (or equilibrium) point is where the system is stable, meaning $\frac{dV_c}{dt} = 0$. From the state equation, this occurs when $u-V_c=0$, or $V_c = u$.
+
+We evaluate the linearized model at a stationary point where $V_c = u = b$. The perturbations around this point are $\Delta V_c = V_c - b$ and $\Delta u = u - b$. The linearized dynamics become:
+$$\frac{d(\Delta V_c)}{dt} \approx g_1 \Delta V_c + g_2 \Delta u$$
+
+The coefficients $g_0$, $g_1$, and $g_2$ are calculated at this stationary point:
+$$g_0 = \frac{b-b}{R(b^2+C_0)} = 0$$
+
+$$g_1 = -\frac{1}{R(b^2+C_0)} = -\frac{1}{RC(b)}$$
+
+$$g_2 = \frac{1}{R(b^2+C_0)} = \frac{1}{RC(b)}$$
+
+---
+
+### Transfer Function
+
+From the linearized dynamics around the stationary point, we can derive the transfer function $G(s) = \frac{\Delta V_c(s)}{\Delta u(s)}$ by taking the Laplace transform:
+$$s \Delta V_c(s) = g_1 \Delta V_c(s) + g_2 \Delta u(s)$$
+$$(s - g_1)\Delta V_c(s) = g_2 \Delta u(s)$$
+
+The resulting first-order transfer function is:
+$$G(s) = \frac{g_2}{s-g_1}$$
 
 ---
 
