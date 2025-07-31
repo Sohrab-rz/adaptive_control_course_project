@@ -34,7 +34,7 @@ Email: srezaei2@jhu.edu
 
 #### 1.1.1 Rohrs' Counterexample Simulation
 
-We first implemented the original system of Rohrs' counterexample and simulated the conditions specified. The block diagram includes the reference model, the main plant, the matching block, and the controller — each described individually.
+We first implemented the original system of Rohrs' counterexample and simulated the conditions specified. The block diagram includes the reference model, the main plant, the adpatation block, and the controller — each described individually.
 
 **Block Diagram:**  
 ![Figure 1 – Overall Rohrs Counterexample Diagram](figures/figure1.png)
@@ -45,7 +45,7 @@ We first implemented the original system of Rohrs' counterexample and simulated 
 **System Model:**  
 ![Figure 3 – Plant Model Block](figures/figure3.png)
 
-**Matching Block:**  
+**adpatation Block:**  
 ![Figure 4 – Adaptation Block Diagram](figures/figure4.png)
 
 **Controller Block:**  
@@ -57,7 +57,7 @@ With the full system diagram in place, we tested performance under different con
 
 #### 1.1.2 Dead‑Zone Method
 
-Similar system structure, but the matching block incorporates dead‑zone logic. After signal normalization, the dead‑zone is applied as shown:
+Similar system structure, but the adpatation block incorporates dead‑zone logic. After signal normalization, the dead‑zone is applied as shown:
 
 ![Figure 6 – Adaptation Block with Dead‑Zone](figures/figure6.png)
 
@@ -65,7 +65,7 @@ Similar system structure, but the matching block incorporates dead‑zone logic.
 
 #### 1.1.3 σ‑Modification Method
 
-In this variant, the matching block includes σ‑Modification: an adaptation decay term is introduced governed by σ, and the adaptation law is modified accordingly:
+In this variant, the adpatation block includes σ‑Modification: an adaptation decay term is introduced governed by σ, and the adaptation law is modified accordingly:
 
 ![Figure 7 – Adaptation Block with σ‑Modification](figures/figure7.png)
 
@@ -77,9 +77,9 @@ We restricted adaptation parameters within limits:
 - \( K_r \in [0, 0.5] \)  
 - \( K_y \in [-3, 0] \)
 
-The matching block enforces these bounds:
+The adpatation block enforces these bounds:
 
-![Figure 8 – Bounded Parameter Matching Block](figures/figure8.png)
+![Figure 8 – Bounded Parameter adpatation Block](figures/figure8.png)
 
 ---
 
