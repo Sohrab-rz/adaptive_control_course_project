@@ -269,21 +269,39 @@ Using MATLAB’s PID Tuner, coefficients were obtained for each linearized opera
 The system demonstrates effective control under various input types and noise conditions.
 
 **MMPID without noise:**  
-![Figure 31](figures/figure31.png)
-
+  - *Figure 31: 
+   <p align="center">
+    <img src="figures/figure31a.png" width="70%" />
+    <img src="figures/figure31b.png" width="70%" />
+  </p> 
 **MMPID with noise:**  
-![Figure 32](figures/figure32.png)
-
+  - *Figure 32: 
+   <p align="center">
+    <img src="figures/figure32a.png" width="70%" />
+    <img src="figures/figure32b.png" width="70%" />
+  </p> 
 **Square wave, no noise:**  
-![Figure 33](figures/figure33.png)
-
+  - *Figure 33: 
+   <p align="center">
+    <img src="figures/figure33a.png" width="70%" />
+    <img src="figures/figure33b.png" width="70%" />
+  </p> 
 **Square wave, with noise:**  
-![Figure 34](figures/figure34.png)
-
+  - *Figure 34: 
+   <p align="center">
+    <img src="figures/figure34a.png" width="70%" />
+    <img src="figures/figure34b.png" width="70%" />
+  </p> 
 **Step input, no noise:**  
-![Figure 35](figures/figure35.png)
-
+  - *Figure 35: 
+   <p align="center">
+    <img src="figures/figure35a.png" width="70%" />
+    <img src="figures/figure35b.png" width="70%" />
+  </p> 
 **Step input, with noise:**  
-![Figure 36](figures/figure36.png)
-
+  - *Figure 36: 
+   <p align="center">
+    <img src="figures/figure36a.png" width="70%" />
+    <img src="figures/figure36b.png" width="70%" />
+  </p> 
 --
