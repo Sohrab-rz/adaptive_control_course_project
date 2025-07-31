@@ -104,34 +104,34 @@ The same system structure is used with input noise added to ensure persistent ex
   
 - **Square wave input, with output noise**: still stable.  
    <p align="center">
-    <img src="figures/figure11a.png" width="30%" />
-    <img src="figures/figure11b.png" width="30%" />
+    <img src="figures/figure11a.png" width="70%" />
+    <img src="figures/figure11b.png" width="70%" />
   </p>  
   *Figure 11: Reference tracking, control signal, and parameters.*
 
 - **Long-time step input, no noise**: stable response.  
    <p align="center">
-    <img src="figures/figure12a.png" width="30%" />
-    <img src="figures/figure12b.png" width="30%" />
+    <img src="figures/figure12a.png" width="70%" />
+    <img src="figures/figure12b.png" width="70%" />
   </p>  
   *Figure 12: Reference tracking, control signal, and parameters.*
   
 - **Long-time step input, with noise**: instability due to parameter drift observed.  
    <p align="center">
-    <img src="figures/figure13a.png" width="30%" />
-    <img src="figures/figure13b.png" width="30%" />
+    <img src="figures/figure13a.png" width="70%" />
+    <img src="figures/figure13b.png" width="70%" />
   </p>  
   *Figure 13: Reference tracking, control signal, and parameters.*
 - **Sinusoidal input at 8 rad/s**: system exhibits parameter explosion as expected.  
    <p align="center">
-    <img src="figures/figure14a.png" width="30%" />
-    <img src="figures/figure14b.png" width="30%" />
+    <img src="figures/figure14a.png" width="70%" />
+    <img src="figures/figure14b.png" width="70%" />
   </p>  
   *Figure 14: Reference tracking, control signal, and parameters.*
 - **Sinusoidal input at 16.1 rad/s**: system becomes unstable.  
    <p align="center">
-    <img src="figures/figure15a.png" width="30%" />
-    <img src="figures/figure15b.png" width="30%" />
+    <img src="figures/figure15a.png" width="70%" />
+    <img src="figures/figure15b.png" width="70%" />
   </p>  
   *Figure 15: Reference tracking, control signal, and parameters.*
 ---
