@@ -160,7 +160,7 @@ The same system structure is used with input noise added to ensure persistent ex
   </p>  
 
 - Robust against output noise.  
-- *Figure 16: 
+- *Figure 19: 
    <p align="center">
     <img src="figures/figure19a.png" width="70%" />
     <img src="figures/figure19b.png" width="70%" />
@@ -181,17 +181,30 @@ The same system structure is used with input noise added to ensure persistent ex
 #### 1.2.4 Control‑Parameter Bounding Results
 
 - Response to 16.1 rad/s sinusoid is stable.  
-  ![Figure 21](figures/figure21.png)
+  - *Figure 21: 
+   <p align="center">
+    <img src="figures/figure22a.png" width="70%" />
+    <img src="figures/figure22b.png" width="70%" />
+  </p> 
 
 - Among all methods, square wave performance is best here. Bounding limits prevent over-aggressive adaptation.  
-  ![Figure 22](figures/figure22.png)
+  - *Figure 22: 
+   <p align="center">
+    <img src="figures/figure23a.png" width="70%" />
+    <img src="figures/figure23b.png" width="70%" />
+  </p> 
 
 ---
 
 #### 1.2.5 Effect of PE Signal Results
 
 - PE input prevents instability, but response remains suboptimal, and parameter drift ("explosion") may still occur.  
-  ![Figure 23](figures/figure23.png)
+  - *Figure 23: 
+   <p align="center">
+    <img src="figures/figure24a.png" width="70%" />
+    <img src="figures/figure24b.png" width="70%" />
+  </p> 
+
 
 ---
 ## References
