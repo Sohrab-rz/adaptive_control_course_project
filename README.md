@@ -1,7 +1,3 @@
-# adaptive_control_course_project
-Adaptive Control and Switching Systems
-
-
 # Adaptive Control and Switching Systems — Course Projects
 
 **Name:** Sohrab Rezaei  
