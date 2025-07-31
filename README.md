@@ -7,7 +7,7 @@
 
 ## Table of Contents
 
-1. [Project 1 – Course Project 1](#project-1-course-project-1)  
+1. [Project 1 – Course Project 1](#project-1)  
    1.1 Implementation  
      1.1.1 Rohrs' Counterexample Simulation  
      1.1.2 Dead-Zone Method  
@@ -21,7 +21,7 @@
      1.2.4 Control-Parameter Bounding Results  
      1.2.5 Effect of PE Signal Results  
 
-2. [Project 2– Course Project 3](#project-3-course-project-3)  
+2. [Project 2– Course Project 3](#project-2)  
    2.1 Problem Definition  
    2.2 Simulation  
    2.3 PID Tuning Method  
