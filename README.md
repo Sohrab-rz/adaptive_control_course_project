@@ -97,8 +97,8 @@ The same system structure is used with input noise added to ensure persistent ex
 
 - **Square wave input, without noise**: response stable and acceptable.  
    <p align="center">
-    <img src="figures/figure10a.png" width="30%" />
-    <img src="figures/figure10b.png" width="30%" />
+    <img src="figures/figure10a.png" width="70%" />
+    <img src="figures/figure10b.png" width="70%" />
   </p>  
   *Figure 10: Reference tracking, control signal, and parameters.*
   
